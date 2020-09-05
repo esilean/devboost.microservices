@@ -14,6 +14,8 @@ namespace DroneDelivery.Domain.Models
 
         public DateTime DataPedido { get; private set; }
 
+        public double Valor { get; private set; }
+
         public PedidoStatus Status { get; private set; }
 
         public Guid? DroneId { get; private set; }
@@ -22,16 +24,17 @@ namespace DroneDelivery.Domain.Models
 
         protected Pedido() { }
 
-        private Pedido(double peso, Usuario usuario)
+        private Pedido(double peso, double valor, Usuario usuario)
         {
             Peso = peso;
+            Valor = valor;
             Usuario = usuario;
             DataPedido = DateTime.Now;
         }
 
-        public static Pedido Criar(double peso, Usuario usuario)
+        public static Pedido Criar(double peso, double valor, Usuario usuario)
         {
-            return new Pedido(peso, usuario);
+            return new Pedido(peso, valor, usuario);
         }
 
         public void AtualizarStatusPedido(PedidoStatus status)

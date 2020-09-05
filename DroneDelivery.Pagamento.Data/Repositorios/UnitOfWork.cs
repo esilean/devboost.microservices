@@ -12,11 +12,11 @@ namespace DroneDelivery.Pagamento.Data.Repositorios
         public UnitOfWork(DronePgtoDbContext context)
         {
             _context = context;
-            PedidoPagamentos = new PedidoPagamentoRepository(_context);
+            Pedidos = new PedidoRepository(_context);
         }
 
 
-        public IPedidoPagamentoRepository PedidoPagamentos { get; }
+        public IPedidoRepository Pedidos { get; }
 
         public void Dispose()
         {

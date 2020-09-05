@@ -1,11 +1,10 @@
 ﻿using DroneDelivery.Pagamento.Application.Dtos;
-using System;
 using System.Threading.Tasks;
 
 namespace DroneDelivery.Pagamento.Application.Interfaces
 {
-    public interface IPedidoPagamentoService
+    public interface IPedidoService
     {
-        Task RealizarPagamento(Guid pedidoId, CriarPedidoPagamentoDto criarPedidoPagamentoDto);
+        Task CriarPedido(CriarPedidoDto criarPedidoDto);
     }
 }

@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DroneDelivery.Pagamento.Application\DroneDelivery.Pagamento.Application.csproj" />
     <ProjectReference Include="..\DroneDelivery.Pagamento.Data\DroneDelivery.Pagamento.Data.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Infra\DroneDelivery.Shared.Infra.csproj" />
   </ItemGroup>
 
 

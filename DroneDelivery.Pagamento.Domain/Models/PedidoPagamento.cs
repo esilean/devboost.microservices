@@ -8,9 +8,9 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public Guid Id { get; private set; }
 
-        public Guid PedidoId { get; private set; }
+        public Pedido Pedido { get; private set; }
 
-        public double Valor { get; private set; }
+        public double ValorPago { get; private set; }
 
         public string NumeroCartao { get; private set; }
 
@@ -18,13 +18,16 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public int CodigoSeguranca { get; private set; }
 
-        public PagamentoStatus Status { get; set; }
+        public PagamentoStatus Status { get; private set; }
 
-        public PedidoPagamento(Guid pedidoId, double valor, string numeroCartao, DateTime vencimentoCartao, int codigoSeguranca)
+
+        protected PedidoPagamento() { }
+
+        public PedidoPagamento(Pedido pedido, string numeroCartao, DateTime vencimentoCartao, int codigoSeguranca)
         {
             Id = Guid.NewGuid();
-            PedidoId = pedidoId;
-            Valor = valor;
+            Pedido = pedido;
+            ValorPago = pedido.Valor;
             NumeroCartao = numeroCartao;
             VencimentoCartao = vencimentoCartao;
             CodigoSeguranca = codigoSeguranca;

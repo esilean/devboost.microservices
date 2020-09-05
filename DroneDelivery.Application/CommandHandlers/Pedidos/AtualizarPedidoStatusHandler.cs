@@ -1,6 +1,5 @@
 ﻿using DroneDelivery.Application.Commands.Pedidos;
 using DroneDelivery.Application.Configs;
-using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Repositorios.Interfaces;
 using DroneDelivery.Domain.Core.Domain;
 using DroneDelivery.Domain.Core.Validator;
@@ -20,14 +19,12 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
     public class AtualizarPedidoStatusHandler : ValidatorResponse, IRequestHandler<AtualizarPedidoStatusCommand, ResponseResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUsuarioAutenticado _usuarioAutenticado;
         private readonly ICalcularTempoEntrega _calcularTempoEntrega;
         private readonly IOptions<DronePontoInicialConfig> _dronePontoInicialConfig;
 
-        public AtualizarPedidoStatusHandler(IUnitOfWork unitOfWork, IUsuarioAutenticado usuarioAutenticado, IOptions<DronePontoInicialConfig> dronePontoInicialConfig, ICalcularTempoEntrega calcularTempoEntrega)
+        public AtualizarPedidoStatusHandler(IUnitOfWork unitOfWork, IOptions<DronePontoInicialConfig> dronePontoInicialConfig, ICalcularTempoEntrega calcularTempoEntrega)
         {
             _unitOfWork = unitOfWork;
-            _usuarioAutenticado = usuarioAutenticado;
             _calcularTempoEntrega = calcularTempoEntrega;
             _dronePontoInicialConfig = dronePontoInicialConfig;
         }
@@ -48,7 +45,7 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
                 return _response;
             }
 
-            if(pedido.Status != PedidoStatus.AguardandoPagamento)
+            if (pedido.Status != PedidoStatus.AguardandoPagamento)
             {
                 _response.AddNotification(new Notification("pedido", $"o status do pedido é {pedido.Status}. não pode ser alterado."));
                 return _response;
@@ -66,8 +63,7 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
                     return _response;
                 }
 
-                var clienteId = _usuarioAutenticado.GetCurrentId();
-                var cliente = await _unitOfWork.Usuarios.ObterPorIdAsync(clienteId);
+                var cliente = await _unitOfWork.Usuarios.ObterPorIdAsync(pedido.UsuarioId.GetValueOrDefault());
                 if (cliente == null)
                 {
                     _response.AddNotification(new Notification("pedido", PedidoMessage.Erro_ClienteNaoEncontrado));

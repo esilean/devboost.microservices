@@ -51,7 +51,7 @@ namespace DroneDelivery.Data.Tests.Config
             context.Add(drone1);
             context.Add(drone2);
 
-            var pedido = Pedido.Criar(5000, usuario);
+            var pedido = Pedido.Criar(5000, 1000, usuario);
 
             context.Add(pedido);
 

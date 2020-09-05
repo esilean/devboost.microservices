@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DroneDelivery.Utility.Messages;
+using DroneDelivery.Application.Dtos.Pedido;
 
 namespace DroneDelivery.Application.CommandHandlers.Pedidos
 {
@@ -21,11 +22,13 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUsuarioAutenticado _usuarioAutenticado;
+        private readonly IEnviarPedidoPagamento _enviarPedidoPagamento;
 
-        public CriarPedidoHandler(IUnitOfWork unitOfWork, IUsuarioAutenticado usuarioAutenticado)
+        public CriarPedidoHandler(IUnitOfWork unitOfWork, IUsuarioAutenticado usuarioAutenticado, IEnviarPedidoPagamento enviarPedidoPagamento)
         {
             _unitOfWork = unitOfWork;
             _usuarioAutenticado = usuarioAutenticado;
+            _enviarPedidoPagamento = enviarPedidoPagamento;
         }
 
 
@@ -46,9 +49,17 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
                 return _response;
             }
 
-            var pedido = Pedido.Criar(request.Peso, cliente);
+            var pedido = Pedido.Criar(request.Peso, request.Valor, cliente);
             pedido.AtualizarStatusPedido(PedidoStatus.AguardandoPagamento);
-            
+
+
+            await _enviarPedidoPagamento.ReceberPedidoPagamento(new CriarPedidoDto
+            {
+                PedidoId = pedido.Id,
+                Valor = pedido.Valor
+            });
+
+
 
             await _unitOfWork.Pedidos.AdicionarAsync(pedido);
             await _unitOfWork.SaveAsync();

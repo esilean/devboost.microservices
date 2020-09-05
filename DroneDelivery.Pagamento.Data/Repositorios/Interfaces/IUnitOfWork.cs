@@ -5,7 +5,7 @@ namespace DroneDelivery.Pagamento.Data.Repositorios.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IPedidoPagamentoRepository PedidoPagamentos { get; }
+        IPedidoRepository Pedidos { get; }
 
         Task SaveAsync();
 

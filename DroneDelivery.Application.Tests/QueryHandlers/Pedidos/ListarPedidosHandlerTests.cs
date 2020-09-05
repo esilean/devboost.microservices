@@ -33,7 +33,7 @@ namespace DroneDelivery.Application.Tests.QueryHandlers.Pedidos
             var usuario = Usuario.Criar("test", "test@test.com", 0, 0, UsuarioRole.Cliente);
             IEnumerable<Pedido> pedidos = new List<Pedido>
             {
-                Pedido.Criar(1000, usuario)
+                Pedido.Criar(1000, 1000, usuario)
             };
 
             _mocker.GetMock<IUsuarioAutenticado>()

@@ -10,6 +10,7 @@ namespace DroneDelivery.Pagamento.Data.Data
         {
         }
 
+        public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoPagamento> Pagamentos { get; set; }
     }
 }

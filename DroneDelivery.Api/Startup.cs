@@ -16,13 +16,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace DroneDelivery.Api
 {
@@ -57,8 +54,8 @@ namespace DroneDelivery.Api
         }
 
 
-        public void ConfigureServices(IServiceCollection services) 
-        { 
+        public void ConfigureServices(IServiceCollection services)
+        {
 
             services.AddSwaggerGen(opts =>
             {
@@ -106,6 +103,13 @@ namespace DroneDelivery.Api
 
             services.Configure<DronePontoInicialConfig>(Configuration.GetSection("BaseDrone"));
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
+
+
+            services.AddHttpClient("pagamentos", opts =>
+            {
+                opts.BaseAddress = new Uri(Configuration["UrlBasePagamento"]);
+            });
+
 
             RegisterServices(services);
         }

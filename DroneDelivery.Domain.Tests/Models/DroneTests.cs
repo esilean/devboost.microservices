@@ -57,7 +57,7 @@ namespace DroneDelivery.Domain.Tests.Models
             var calcularTempoEntrega = new Mock<ICalcularTempoEntrega>();
             calcularTempoEntrega.Setup(p => p.ObterTempoEntregaEmMinutosIda(latitudeOrigem, longitudeOrigem, usuario.Latitude, usuario.Longitude, drone.Velocidade));
 
-            var pedido = Pedido.Criar(capacidadeOcupadaDrone, usuario);
+            var pedido = Pedido.Criar(capacidadeOcupadaDrone, 1000, usuario);
             pedido.AtualizarStatusPedido(PedidoStatus.EmEntrega);
             drone.AdicionarPedido(pedido, calcularTempoEntrega.Object, latitudeOrigem, longitudeOrigem);
 
@@ -82,7 +82,7 @@ namespace DroneDelivery.Domain.Tests.Models
             var calcularTempoEntrega = new Mock<ICalcularTempoEntrega>();
             calcularTempoEntrega.Setup(p => p.ObterTempoEntregaEmMinutosIda(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()));
 
-            var pedido = Pedido.Criar(1000, usuario);
+            var pedido = Pedido.Criar(1000, 1000, usuario);
             pedido.AtualizarStatusPedido(PedidoStatus.EmEntrega);
             drone.AdicionarPedido(pedido, calcularTempoEntrega.Object, It.IsAny<double>(), It.IsAny<double>());
 

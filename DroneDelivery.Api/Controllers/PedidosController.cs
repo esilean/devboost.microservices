@@ -69,19 +69,17 @@ namespace DroneDelivery.Api.Controllers
         ///     }
         ///
         /// </remarks>        
-        /// <param name="pedidoId"></param>  
         /// <param name="command"></param>  
-        [HttpPut("{pedidoId}")]
+        [AllowAnonymous]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AtualizarStatusPedido(Guid pedidoId, AtualizarPedidoStatusCommand command)
+        public async Task<IActionResult> AtualizarStatusPedido(AtualizarPedidoStatusCommand command)
         {
-            command.PedidoId = pedidoId;
             var response = await Mediator.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
-
             return Ok();
         }
 

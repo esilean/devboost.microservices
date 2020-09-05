@@ -26,6 +26,8 @@ using Microsoft.Extensions.DependencyInjection;
 using DroneDelivery.Application.Queries.Usuarios;
 using DroneDelivery.Application.QueryHandlers.Usuarios;
 using System.Diagnostics.CodeAnalysis;
+using DroneDelivery.Shared.Infra;
+using DroneDelivery.Pagamento.Application.Interfaces;
 
 namespace DroneDelivery.IOC
 {
@@ -63,6 +65,9 @@ namespace DroneDelivery.IOC
             services.AddScoped<IRequestHandler<SituacaoDronesQuery, ResponseResult>, ListarSituacaoDronesHandler>();
 
             services.AddScoped<IRequestHandler<PedidosQuery, ResponseResult>, ListarPedidosHandler>();
+
+            //eventos
+            services.AddScoped<IEnviarPedidoPagamento, EnviarPedidoPagamento>();
 
             //repositórios
             services.AddScoped<IUnitOfWork, UnitOfWork>();

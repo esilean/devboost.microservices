@@ -12,6 +12,7 @@
     <ProjectReference Include="..\DroneDelivery.Bus\DroneDelivery.Bus.csproj" />
     <ProjectReference Include="..\DroneDelivery.Domain\DroneDelivery.Domain.csproj" />
     <ProjectReference Include="..\DroneDelivery.Infra\DroneDelivery.Infra.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Infra\DroneDelivery.Shared.Infra.csproj" />
   </ItemGroup>
 
 </Project>

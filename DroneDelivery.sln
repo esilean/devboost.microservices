@@ -69,6 +69,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Pagamento.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Pagamento.Application", "DroneDelivery.Pagamento.Application\DroneDelivery.Pagamento.Application.csproj", "{96CF6FB9-78E2-4C73-B46A-60FA63A2BB10}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{356581CB-AFF8-44E4-9CDD-04C60521456D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Shared.Infra", "DroneDelivery.Shared.Infra\DroneDelivery.Shared.Infra.csproj", "{774149FA-F1F9-4123-9CEA-9493F39A2A1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +155,10 @@ Global
 		{96CF6FB9-78E2-4C73-B46A-60FA63A2BB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96CF6FB9-78E2-4C73-B46A-60FA63A2BB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96CF6FB9-78E2-4C73-B46A-60FA63A2BB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774149FA-F1F9-4123-9CEA-9493F39A2A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774149FA-F1F9-4123-9CEA-9493F39A2A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774149FA-F1F9-4123-9CEA-9493F39A2A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774149FA-F1F9-4123-9CEA-9493F39A2A1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +195,7 @@ Global
 		{90D11130-8550-4FD1-BDD4-FF0264018430} = {B702DBA1-A82E-4F5B-94BD-81766EF2191D}
 		{DA65263F-7A4A-4DA5-BDA1-06FAEA3B436F} = {B702DBA1-A82E-4F5B-94BD-81766EF2191D}
 		{96CF6FB9-78E2-4C73-B46A-60FA63A2BB10} = {B702DBA1-A82E-4F5B-94BD-81766EF2191D}
+		{774149FA-F1F9-4123-9CEA-9493F39A2A1C} = {356581CB-AFF8-44E4-9CDD-04C60521456D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47DA7E87-7CF5-4C6C-A092-C9675E83C77B}

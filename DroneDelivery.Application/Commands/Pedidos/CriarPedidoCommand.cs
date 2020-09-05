@@ -11,11 +11,11 @@ namespace DroneDelivery.Application.Commands.Pedidos
 
         public double Valor { get; set; }
 
-        public string NumeroCartao { get; set; }
+        //public string NumeroCartao { get; set; }
 
-        public DateTime VencimentoCartao { get; set; }
+        //public DateTime VencimentoCartao { get; set; }
 
-        public int CodigoSeguranca { get; set; }
+        //public int CodigoSeguranca { get; set; }
 
 
         [JsonConstructor]
@@ -33,23 +33,27 @@ namespace DroneDelivery.Application.Commands.Pedidos
 
             AddNotifications(new Contract()
                 .Requires()
-                .IsLowerOrEqualsThan(Peso, Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS, nameof(Peso), $"O Peso tem que ser menor ou igual a {Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS / 1000} KGs"));
-
-            AddNotifications(new Contract()
-                .Requires()
                 .IsGreaterThan(Valor, 0, nameof(Valor), "O Valor tem que ser maior que zero"));
 
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotNullOrEmpty(NumeroCartao, nameof(NumeroCartao), "O Número Cartão não pode ser vazio"));
+                .IsLowerOrEqualsThan(Peso, Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS, nameof(Peso), $"O Peso tem que ser menor ou igual a {Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS / 1000} KGs"));
 
-            AddNotifications(new Contract()
-                .Requires()
-                .IsNotNull(VencimentoCartao, nameof(VencimentoCartao), "O Vencimento Cartão não pode ser vazio"));
+            //AddNotifications(new Contract()
+            //    .Requires()
+            //    .IsGreaterThan(Valor, 0, nameof(Valor), "O Valor tem que ser maior que zero"));
 
-            AddNotifications(new Contract()
-                .Requires()
-                .IsGreaterThan(CodigoSeguranca, 0, nameof(CodigoSeguranca), "O Código de Segurança tem que ser maior que zero"));
+            //AddNotifications(new Contract()
+            //    .Requires()
+            //    .IsNotNullOrEmpty(NumeroCartao, nameof(NumeroCartao), "O Número Cartão não pode ser vazio"));
+
+            //AddNotifications(new Contract()
+            //    .Requires()
+            //    .IsNotNull(VencimentoCartao, nameof(VencimentoCartao), "O Vencimento Cartão não pode ser vazio"));
+
+            //AddNotifications(new Contract()
+            //    .Requires()
+            //    .IsGreaterThan(CodigoSeguranca, 0, nameof(CodigoSeguranca), "O Código de Segurança tem que ser maior que zero"));
 
 
         }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DroneDelivery.Pagamento.Data.Migrations
 {
     [DbContext(typeof(DronePgtoDbContext))]
-    [Migration("20200905143600_AdicionarPedidoPagamento")]
-    partial class AdicionarPedidoPagamento
+    [Migration("20200905163746_AdicionarTabelasPagamento")]
+    partial class AdicionarTabelasPagamento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,24 @@ namespace DroneDelivery.Pagamento.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DroneDelivery.Pagamento.Domain.PedidoPagamento", b =>
+            modelBuilder.Entity("DroneDelivery.Pagamento.Domain.Models.Pedido", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PedidoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pedidos");
+                });
+
+            modelBuilder.Entity("DroneDelivery.Pagamento.Domain.Models.PedidoPagamento", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,8 +50,11 @@ namespace DroneDelivery.Pagamento.Data.Migrations
                     b.Property<string>("NumeroCartao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PedidoId")
+                    b.Property<Guid?>("PedidoId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<double>("Valor")
                         .HasColumnType("float");
@@ -44,7 +64,16 @@ namespace DroneDelivery.Pagamento.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PedidoId");
+
                     b.ToTable("Pagamentos");
+                });
+
+            modelBuilder.Entity("DroneDelivery.Pagamento.Domain.Models.PedidoPagamento", b =>
+                {
+                    b.HasOne("DroneDelivery.Pagamento.Domain.Models.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("PedidoId");
                 });
 #pragma warning restore 612, 618
         }
