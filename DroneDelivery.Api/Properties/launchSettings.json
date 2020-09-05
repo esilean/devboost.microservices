@@ -1,0 +1,37 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52869",
+      "sslPort": 44352
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "AZURE_USERNAME": "refaglopes@gmail.com",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "DroneDelivery.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "AZURE_USERNAME": "refaglopes@gmail.com",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  }
+}

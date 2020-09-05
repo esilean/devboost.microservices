@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+    <UserSecretsId>2c574918-231f-4467-b6d4-9f84ba77e48b</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/68ca1a45-ff2c-46ac-8091-b1bc079b4b4a/resourceGroups/DroneDelivery/providers/microsoft.insights/components/DevBoost.Drone</ApplicationInsightsResourceId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.2.2" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DroneDelivery.Application\DroneDelivery.Application.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Data\DroneDelivery.Data.csproj" />
+    <ProjectReference Include="..\DroneDelivery.IOC\DroneDelivery.IOC.csproj" />
+  </ItemGroup>
+
+
+</Project>
