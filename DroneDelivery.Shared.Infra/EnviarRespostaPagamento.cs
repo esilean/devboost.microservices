@@ -19,7 +19,7 @@ namespace DroneDelivery.Shared.Infra
         {
 
             var client = _factory.CreateClient("pedidos");
-            var response = await client.PutAsJsonAsync("/api/pedidos", criarRepostaPagamentoDto);
+            var response = await client.PostAsJsonAsync("/api/pedidos/atualizarstatus", criarRepostaPagamentoDto);
 
             return response.IsSuccessStatusCode;
         }

@@ -19,7 +19,7 @@ namespace DroneDelivery.Pagamento.Application.Services
             //validacoes do DTO
 
 
-            var pedido = new Pedido(criarPedidoDto.PedidoId, criarPedidoDto.Valor);
+            var pedido = new Pedido(criarPedidoDto.Id, criarPedidoDto.Valor);
 
 
             await _unitOfWork.Pedidos.AdicionarAsync(pedido);

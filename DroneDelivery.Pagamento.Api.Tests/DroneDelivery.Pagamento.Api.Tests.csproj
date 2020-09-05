@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -21,19 +21,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DroneDelivery.Api\DroneDelivery.Api.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Pagamento.Api\DroneDelivery.Pagamento.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BDD\ObterSituacaoDrone.feature.cs">
+    <Compile Update="BDD\CriarPedido.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="BDD\RealizarPagamento.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="BDD\ObterSituacaoDrone.feature">
+    <SpecFlowFeatureFiles Update="BDD\CriarPedido.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ObterSituacaoDrone.feature.cs</LastGenOutput>
+      <LastGenOutput>CriarPedido.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="BDD\RealizarPagamento.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RealizarPagamento.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 

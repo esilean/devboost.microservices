@@ -20,7 +20,6 @@ namespace DroneDelivery.Pagamento.Api.Controllers
         public async Task<IActionResult> Adicionar(CriarPedidoDto criarPedidoDto)
         {
             await _pedidoService.CriarPedido(criarPedidoDto);
-
             return Ok();
         }
 

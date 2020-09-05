@@ -1,9 +1,11 @@
+using DroneDelivery.Pagamento.Api.Middeware;
 using DroneDelivery.Pagamento.Application.Interfaces;
 using DroneDelivery.Pagamento.Application.Services;
 using DroneDelivery.Pagamento.Data.Data;
 using DroneDelivery.Pagamento.Data.Repositorios;
 using DroneDelivery.Pagamento.Data.Repositorios.Interfaces;
 using DroneDelivery.Shared.Infra;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,27 @@ namespace DroneDelivery.Pagamento.Api
         }
 
         public IConfiguration Configuration { get; }
+
+        public void ConfigureTestingServices(IServiceCollection services)
+        {
+            services.AddDbContext<DronePgtoDbContext>(opts =>
+            {
+                opts.UseInMemoryDatabase("DronePgtoInMemory");
+            });
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DronePgtoDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            ConfigureServices(services);
+        }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -50,9 +73,11 @@ namespace DroneDelivery.Pagamento.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseMiddleware(typeof(ErrorHandlerMiddleware));
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();

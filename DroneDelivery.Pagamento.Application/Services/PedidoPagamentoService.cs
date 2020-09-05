@@ -48,7 +48,7 @@ namespace DroneDelivery.Pagamento.Application.Services
             //// publicar uma resposta
             await _enviarRespostaPagamento.EnviarConfirmacaoPagamento(new CriarRepostaPagamentoDto
             {
-                PedidoId = pedido.PedidoId,
+                Id = pedido.Id,
                 Status = pedido.Status
             });
 

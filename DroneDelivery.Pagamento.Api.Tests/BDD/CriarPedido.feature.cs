@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DroneDelivery.Api.Tests.BDD
+namespace DroneDelivery.Pagamento.Api.Tests.BDD
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace DroneDelivery.Api.Tests.BDD
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ObterSituacaoDroneFeature : object, Xunit.IClassFixture<ObterSituacaoDroneFeature.FixtureData>, System.IDisposable
+    public partial class CriarPedidoParaPagamentoFeature : object, Xunit.IClassFixture<CriarPedidoParaPagamentoFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace DroneDelivery.Api.Tests.BDD
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "DroneSituacao.feature"
+#line 1 "CriarPedido.feature"
 #line hidden
         
-        public ObterSituacaoDroneFeature(ObterSituacaoDroneFeature.FixtureData fixtureData, DroneDelivery_Api_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public CriarPedidoParaPagamentoFeature(CriarPedidoParaPagamentoFeature.FixtureData fixtureData, DroneDelivery_Pagamento_Api_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,8 @@ namespace DroneDelivery.Api.Tests.BDD
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "BDD", "ObterSituacaoDrone", "\tPara realizar uma consutla de status do drone\r\n\tDevemos consumir uma API", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "BDD", "CriarPedidoParaPagamento", "\tPara realizar um pagamento no sistema\r\n\tDevemos receber o Id do Pedido e cadastr" +
+                    "ar na base", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,14 +81,14 @@ namespace DroneDelivery.Api.Tests.BDD
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Solicitar status do drone")]
-        [Xunit.TraitAttribute("FeatureTitle", "ObterSituacaoDrone")]
-        [Xunit.TraitAttribute("Description", "Solicitar status do drone")]
-        public virtual void SolicitarStatusDoDrone()
+        [Xunit.SkippableFactAttribute(DisplayName="Criar pedido para pagamento")]
+        [Xunit.TraitAttribute("FeatureTitle", "CriarPedidoParaPagamento")]
+        [Xunit.TraitAttribute("Description", "Criar pedido para pagamento")]
+        public virtual void CriarPedidoParaPagamento()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Solicitar status do drone", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Criar pedido para pagamento", null, tagsOfScenario, argumentsOfScenario);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -109,19 +110,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 9
- testRunner.Given("que exista um drone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("Que eu receba um Id do Pedido e Valor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 10
- testRunner.And("que este drone possua um pedido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.When("eu solicitar a criação do pedido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 11
- testRunner.When("eu solicitar o status do drone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
-#line hidden
-#line 12
- testRunner.Then("a resposta devera ser um status code 200OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
-#line hidden
-#line 13
- testRunner.And("devera retornar os pedidos do drone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("o pedido deverá ser cadastrado a resposta devera ser um status code 200OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -134,12 +129,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                ObterSituacaoDroneFeature.FeatureSetup();
+                CriarPedidoParaPagamentoFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ObterSituacaoDroneFeature.FeatureTearDown();
+                CriarPedidoParaPagamentoFeature.FeatureTearDown();
             }
         }
     }

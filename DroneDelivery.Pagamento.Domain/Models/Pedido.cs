@@ -6,9 +6,8 @@ namespace DroneDelivery.Pagamento.Domain.Models
 {
     public class Pedido
     {
-        public Guid Id { get; private set; }
 
-        public Guid PedidoId { get; private set; }
+        public Guid Id { get; private set; }
 
         public double Valor { get; set; }
 
@@ -16,10 +15,9 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public List<PedidoPagamento> Pagamentos { get; private set; }
 
-        public Pedido(Guid pedidoId, double valor)
+        public Pedido(Guid id, double valor)
         {
-            Id = Guid.NewGuid();
-            PedidoId = pedidoId;
+            Id = id;
             Valor = valor;
             Status = PedidoStatus.AguardandoPagamento;
             Pagamentos = new List<PedidoPagamento>();

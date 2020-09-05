@@ -1,6 +1,7 @@
 using AutoMapper;
 using DroneDelivery.Api.Configs;
 using DroneDelivery.Api.Filter;
+using DroneDelivery.Api.Middeware;
 using DroneDelivery.Application.CommandHandlers.Usuarios;
 using DroneDelivery.Application.Configs;
 using DroneDelivery.Application.Interfaces;
@@ -123,10 +124,12 @@ namespace DroneDelivery.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DroneDbContext context, IPasswordHasher<Usuario> passwordHasher, IGeradorToken geradorToken)
         {
 
+            app.UseMiddleware(typeof(ErrorHandlerMiddleware));
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
+
 
             app.UseHttpsRedirection();
 

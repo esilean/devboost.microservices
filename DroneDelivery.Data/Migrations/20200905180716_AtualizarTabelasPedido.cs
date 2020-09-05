@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DroneDelivery.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AtualizarTabelasPedido : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

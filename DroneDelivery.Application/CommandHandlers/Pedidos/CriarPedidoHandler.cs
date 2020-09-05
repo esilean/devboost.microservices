@@ -55,7 +55,7 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
 
             await _enviarPedidoPagamento.ReceberPedidoPagamento(new CriarPedidoDto
             {
-                PedidoId = pedido.Id,
+                Id = pedido.Id,
                 Valor = pedido.Valor
             });
 

@@ -38,7 +38,7 @@ namespace DroneDelivery.Application.CommandHandlers.Pedidos
                 return _response;
             }
 
-            var pedido = await _unitOfWork.Pedidos.ObterPorIdAsync(request.PedidoId);
+            var pedido = await _unitOfWork.Pedidos.ObterPorIdAsync(request.Id);
             if (pedido == null)
             {
                 _response.AddNotification(new Notification("pedido", "pedido não foi encontrado"));

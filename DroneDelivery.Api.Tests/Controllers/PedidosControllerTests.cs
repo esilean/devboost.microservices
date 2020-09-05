@@ -28,7 +28,7 @@ namespace DroneDelivery.Api.Tests.Controllers
             await _testsFixture.Client.PostAsJsonAsync("/api/drones", drone);
 
             // Arrange
-            var pedido = new CriarPedidoCommand(10000);
+            var pedido = new CriarPedidoCommand(10000, 100);
 
             await _testsFixture.RealizarLoginApi();
             _testsFixture.Client.AddToken(_testsFixture.Token);

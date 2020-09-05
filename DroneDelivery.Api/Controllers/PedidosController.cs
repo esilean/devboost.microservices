@@ -75,6 +75,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("AtualizarStatus")]
         public async Task<IActionResult> AtualizarStatusPedido(AtualizarPedidoStatusCommand command)
         {
             var response = await Mediator.SendCommand(command);

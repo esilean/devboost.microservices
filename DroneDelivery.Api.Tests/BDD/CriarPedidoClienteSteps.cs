@@ -42,7 +42,7 @@ namespace DroneDelivery.Api.Tests.BDD
         public async Task QuandoEuSolicitarACriacaoDeUmPedido()
         {
 
-            var pedido = new CriarPedidoCommand(10000);
+            var pedido = new CriarPedidoCommand(10000, 100);
 
             await _testsFixture.RealizarLoginApi();
             _testsFixture.Client.AddToken(_testsFixture.Token);

@@ -5,7 +5,7 @@ namespace DroneDelivery.Pagamento.Application.Dtos
 {
     public class CriarRepostaPagamentoDto
     {
-        public Guid PedidoId { get; set; }
+        public Guid Id { get; set; }
         public PedidoStatus Status { get; set; }
     }
 }
