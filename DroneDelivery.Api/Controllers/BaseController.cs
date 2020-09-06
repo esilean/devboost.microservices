@@ -1,4 +1,4 @@
-﻿using DroneDelivery.Domain.Core.Mediator;
+﻿using DroneDelivery.Shared.Domain.Core.Bus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,8 +8,8 @@ namespace DroneDelivery.Api.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private IMediatorHandler _mediator;
-        protected IMediatorHandler Mediator => _mediator ?? (_mediator = HttpContext.RequestServices.GetService<IMediatorHandler>());
+        private IEventBus _eventBus;
+        protected IEventBus EventBus => _eventBus ??= HttpContext.RequestServices.GetService<IEventBus>();
 
     }
 }

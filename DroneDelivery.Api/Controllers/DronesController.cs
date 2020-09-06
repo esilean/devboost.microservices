@@ -22,7 +22,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<DroneDto>>> ObterTodos()
         {
-            var response = await Mediator.RequestQuery(new DronesQuery());
+            var response = await EventBus.RequestQuery(new DronesQuery());
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -35,7 +35,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<DroneSituacaoDto>>> ObterSituacaoDrones()
         {
-            var response = await Mediator.RequestQuery(new SituacaoDronesQuery());
+            var response = await EventBus.RequestQuery(new SituacaoDronesQuery());
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -65,7 +65,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Adicionar(CriarDroneCommand command)
         {
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
 

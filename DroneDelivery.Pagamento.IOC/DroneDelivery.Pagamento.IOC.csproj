@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DroneDelivery.Pagamento.Application\DroneDelivery.Pagamento.Application.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Pagamento.Data\DroneDelivery.Pagamento.Data.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Pagamento.Gateway\DroneDelivery.Pagamento.Gateway.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Bus\DroneDelivery.Shared.Bus.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Infra\DroneDelivery.Shared.Infra.csproj" />
+  </ItemGroup>
+
+</Project>

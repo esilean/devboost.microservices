@@ -12,6 +12,8 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public double ValorPago { get; private set; }
 
+        public DateTime DataCriacao { get; private set; }
+
         public string NumeroCartao { get; private set; }
 
         public DateTime VencimentoCartao { get; private set; }
@@ -20,18 +22,26 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public PagamentoStatus Status { get; private set; }
 
+        public DateTime? DataConfirmacao { get; set; }
+
 
         protected PedidoPagamento() { }
 
-        public PedidoPagamento(Pedido pedido, string numeroCartao, DateTime vencimentoCartao, int codigoSeguranca)
+        private PedidoPagamento(Pedido pedido, string numeroCartao, DateTime vencimentoCartao, int codigoSeguranca)
         {
             Id = Guid.NewGuid();
             Pedido = pedido;
             ValorPago = pedido.Valor;
+            DataCriacao = DateTime.Now;
             NumeroCartao = numeroCartao;
             VencimentoCartao = vencimentoCartao;
             CodigoSeguranca = codigoSeguranca;
             Status = PagamentoStatus.Aguardando;
+        }
+
+        public static PedidoPagamento Criar(Pedido pedido, string numeroCartao, DateTime vencimentoCartao, int codigoSeguranca)
+        {
+            return new PedidoPagamento(pedido, numeroCartao, vencimentoCartao, codigoSeguranca);
         }
 
         public bool ValidarCartao()
@@ -49,12 +59,17 @@ namespace DroneDelivery.Pagamento.Domain.Models
             return true;
         }
 
-        public void AtualizarStatus(PagamentoStatus status)
+        public void AprovarPagamento()
         {
-            Status = status;
+            DataConfirmacao = DateTime.Now;
+            Status = PagamentoStatus.Aprovado;
         }
 
-
+        public void ReprovarPagamento()
+        {
+            DataConfirmacao = DateTime.Now;
+            Status = PagamentoStatus.Reprovado;
+        }
 
     }
 }

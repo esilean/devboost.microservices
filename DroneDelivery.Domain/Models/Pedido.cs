@@ -1,5 +1,5 @@
-﻿using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Enum;
+﻿using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using System;
 
 namespace DroneDelivery.Domain.Models
@@ -30,6 +30,7 @@ namespace DroneDelivery.Domain.Models
             Valor = valor;
             Usuario = usuario;
             DataPedido = DateTime.Now;
+            Status = PedidoStatus.Pendente;
         }
 
         public static Pedido Criar(double peso, double valor, Usuario usuario)

@@ -1,18 +1,17 @@
 ﻿using DroneDelivery.Application.CommandHandlers.Pedidos;
 using DroneDelivery.Application.Commands.Pedidos;
-using DroneDelivery.Application.Configs;
 using DroneDelivery.Application.Dtos.Pedido;
 using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Repositorios.Interfaces;
 using DroneDelivery.Domain.Enum;
-using DroneDelivery.Domain.Interfaces;
 using DroneDelivery.Domain.Models;
-using DroneDelivery.Utility.Messages;
-using Microsoft.Extensions.Options;
+using DroneDelivery.Shared.Domain.Core.Events;
+using DroneDelivery.Shared.Domain.Core.Events.Pedidos;
+using DroneDelivery.Shared.Infra.Interfaces;
+using DroneDelivery.Shared.Utility.Messages;
 using Moq;
 using Moq.AutoMock;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -68,7 +67,7 @@ namespace DroneDelivery.Application.Tests.CommandHandlers.Pedidos
             // Assert
             Assert.True(responseResult.HasFails);
             Assert.True(responseResult.Fails.Count() == 1);
-            Assert.NotNull(responseResult.Fails.Select(x => x.Message == PedidoMessage.Erro_ClienteNaoEncontrado));
+            Assert.NotNull(responseResult.Fails.Select(x => x.Message == Erros.ErroCliente_NaoEncontrado));
         }
 
         [Fact(DisplayName = "Deve criar um pedido")]
@@ -90,8 +89,8 @@ namespace DroneDelivery.Application.Tests.CommandHandlers.Pedidos
                     .Setup(p => p.Usuarios.ObterPorIdAsync(usuarioId))
                     .Returns(Task.FromResult(usuario));
 
-            _mocker.GetMock<IEnviarPedidoPagamento>()
-                    .Setup(p => p.ReceberPedidoPagamento(It.IsAny<CriarPedidoDto>()));
+            _mocker.GetMock<IPedidoPagamentoEvent>()
+                    .Setup(p => p.EnviarPedido(It.IsAny<PedidoCriadoEvent>()));
 
             //adicionar pedido
             _mocker.GetMock<IUnitOfWork>()

@@ -1,7 +1,6 @@
-﻿using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Enum;
+﻿using DroneDelivery.Domain.Enum;
+using DroneDelivery.Shared.Domain.Core.Domain;
 using System;
-using System.Collections.Generic;
 
 namespace DroneDelivery.Domain.Models
 {

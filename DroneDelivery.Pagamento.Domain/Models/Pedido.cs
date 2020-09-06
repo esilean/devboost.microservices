@@ -1,31 +1,37 @@
-﻿using DroneDelivery.Pagamento.Domain.Enums;
+﻿using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace DroneDelivery.Pagamento.Domain.Models
 {
-    public class Pedido
+    public class Pedido : Entity, IAggregateRoot
     {
 
-        public Guid Id { get; private set; }
-
-        public double Valor { get; set; }
+        public double Valor { get; private set; }
 
         public PedidoStatus Status { get; private set; }
 
-        public List<PedidoPagamento> Pagamentos { get; private set; }
+        private readonly List<PedidoPagamento> _pagamentos;
 
-        public Pedido(Guid id, double valor)
+        public ICollection<PedidoPagamento> Pagamentos => _pagamentos;
+
+        private Pedido(Guid id, double valor)
         {
             Id = id;
             Valor = valor;
             Status = PedidoStatus.AguardandoPagamento;
-            Pagamentos = new List<PedidoPagamento>();
+            _pagamentos = new List<PedidoPagamento>();
+        }
+
+        public static Pedido Criar(Guid id, double valor)
+        {
+            return new Pedido(id, valor);
         }
 
         public void AdicionarPagamento(PedidoPagamento pedidoPagamento)
         {
-            Pagamentos.Add(pedidoPagamento);
+            _pagamentos.Add(pedidoPagamento);
         }
 
         public void AtualizarStatus(PedidoStatus status)

@@ -1,6 +1,6 @@
-﻿using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Enum;
+﻿using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
 using Flunt.Notifications;
 using Xunit;
 

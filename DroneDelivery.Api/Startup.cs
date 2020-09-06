@@ -1,6 +1,6 @@
 using AutoMapper;
 using DroneDelivery.Api.Configs;
-using DroneDelivery.Api.Filter;
+using DroneDelivery.Api.Documentation;
 using DroneDelivery.Api.Middeware;
 using DroneDelivery.Application.CommandHandlers.Usuarios;
 using DroneDelivery.Application.Configs;
@@ -8,6 +8,7 @@ using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Data;
 using DroneDelivery.Domain.Models;
 using DroneDelivery.IOC;
+using DroneDelivery.Shared.Infra.Clients;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -17,10 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System;
-using System.IO;
-using System.Reflection;
 
 namespace DroneDelivery.Api
 {
@@ -33,7 +31,6 @@ namespace DroneDelivery.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureTestingServices(IServiceCollection services)
         {
             services.AddDbContext<DroneDbContext>(opts =>
@@ -58,32 +55,6 @@ namespace DroneDelivery.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddSwaggerGen(opts =>
-            {
-                opts.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Drone Delivery API",
-                    Description = "Entrega de pedidos via drone",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Grupo 5",
-                    }
-                });
-                opts.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Por favor insira um JWT com \"Bearer\" nesse campo",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
-                });
-                opts.OperationFilter<AuthOperationFilter>();
-
-
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                opts.IncludeXmlComments(xmlPath);
-            });
 
             var key = Configuration.GetSection("JwtSettings:SigningKey").Value;
             services.AddAuthentication(x =>
@@ -105,22 +76,14 @@ namespace DroneDelivery.Api
             services.Configure<DronePontoInicialConfig>(Configuration.GetSection("BaseDrone"));
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
+            //Adicionar acesso aos endpoint do microservico de pagamento
+            HttpPagamentoClient.Registrar(services, Configuration["UrlBasePagamento"]);
 
-            services.AddHttpClient("pagamentos", opts =>
-            {
-                opts.BaseAddress = new Uri(Configuration["UrlBasePagamento"]);
-            });
-
-
-            RegisterServices(services);
-        }
-
-        private void RegisterServices(IServiceCollection services)
-        {
+            Swagger.Configurar(services);
             DependencyContainer.RegisterServices(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DroneDbContext context, IPasswordHasher<Usuario> passwordHasher, IGeradorToken geradorToken)
         {
 
@@ -136,10 +99,9 @@ namespace DroneDelivery.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Drone Delivery API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Drone Delivery Entrega V1");
                 c.RoutePrefix = string.Empty;
             });
-
 
             app.UseRouting();
 

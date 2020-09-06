@@ -1,8 +1,9 @@
 ﻿using DroneDelivery.Application.Commands.Usuarios;
 using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Validator;
+using DroneDelivery.Shared.Utility.Messages;
 using Flunt.Notifications;
 using MediatR;
 using System;
@@ -37,7 +38,7 @@ namespace DroneDelivery.Application.CommandHandlers.Usuarios
                 || usuario.RefreshToken != request.RefreshToken
                 || usuario.RefreshTokenExpiracao < DateTime.UtcNow)
             {
-                _response.AddNotification(new Notification("usuario", "token não está autorizado para ser atualizado"));
+                _response.AddNotification(new Notification("usuario", Erros.ErroCliente_RefreshTokenNaoAutorizado));
                 return _response;
             }
 

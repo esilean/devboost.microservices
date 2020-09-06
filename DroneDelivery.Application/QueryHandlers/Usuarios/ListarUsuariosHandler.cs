@@ -2,9 +2,9 @@
 using DroneDelivery.Application.Dtos.Usuario;
 using DroneDelivery.Application.Queries.Usuarios;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Validator;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;

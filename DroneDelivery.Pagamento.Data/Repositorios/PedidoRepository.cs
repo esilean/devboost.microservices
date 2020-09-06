@@ -31,7 +31,7 @@ namespace DroneDelivery.Pagamento.Data.Repositorios
 
         public async Task<Pedido> ObterPorIdAsync(Guid id)
         {
-            return await _context.Pedidos.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Pedidos.Include(x => x.Pagamentos).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

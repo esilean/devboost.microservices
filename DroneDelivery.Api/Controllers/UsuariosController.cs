@@ -2,7 +2,7 @@
 using DroneDelivery.Application.Commands.Usuarios;
 using DroneDelivery.Application.Dtos.Usuario;
 using DroneDelivery.Application.Queries.Usuarios;
-using DroneDelivery.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Domain;
 using Flunt.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +34,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<UsuarioDto>>> ObterTodos()
         {
-            var response = await Mediator.RequestQuery(new UsuariosQuery());
+            var response = await EventBus.RequestQuery(new UsuariosQuery());
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -48,7 +48,7 @@ namespace DroneDelivery.Api.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/usuarios/registrar
+        ///     POST /api/usuarios/login
         ///     {
         ///         "email": "test@test.com",
         ///         "password": "123",
@@ -61,7 +61,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<Notification>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ResponseResult>> Login([FromBody] LoginUsuarioCommand command)
         {
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -75,7 +75,7 @@ namespace DroneDelivery.Api.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/usuarios/login
+        ///     POST /api/usuarios/registrar
         ///     {
         ///         "email": "test@test.com",
         ///         "nome": "Test",
@@ -91,7 +91,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<Notification>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Post([FromBody] CriarUsuarioCommand command)
         {
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -128,7 +128,7 @@ namespace DroneDelivery.Api.Controllers
                 return BadRequest(responseEmail.Fails);
             }
 
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
 

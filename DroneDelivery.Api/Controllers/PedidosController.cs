@@ -4,7 +4,6 @@ using DroneDelivery.Application.Queries.Pedidos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,7 +21,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<PedidoDto>>> ObterTodos()
         {
-            var response = await Mediator.RequestQuery(new PedidosQuery());
+            var response = await EventBus.RequestQuery(new PedidosQuery());
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -39,6 +38,7 @@ namespace DroneDelivery.Api.Controllers
         ///     POST /api/pedidos
         ///     {
         ///        "peso": 10000
+        ///        "valor": 999
         ///     }
         ///
         /// </remarks>        
@@ -49,7 +49,7 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Adicionar(CriarPedidoCommand command)
         {
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
 
@@ -63,9 +63,10 @@ namespace DroneDelivery.Api.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     PUT /api/pedidos
+        ///     POST /api/pedidos/atualizarstatus
         ///     {
-        ///        "status": "aprovado"
+        ///        "id": "Guid",
+        ///        "status": 3
         ///     }
         ///
         /// </remarks>        
@@ -75,10 +76,10 @@ namespace DroneDelivery.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("AtualizarStatus")]
+        [Route("atualizarstatus")]
         public async Task<IActionResult> AtualizarStatusPedido(AtualizarPedidoStatusCommand command)
         {
-            var response = await Mediator.SendCommand(command);
+            var response = await EventBus.SendCommand(command);
             if (response.HasFails)
                 return BadRequest(response.Fails);
             return Ok();

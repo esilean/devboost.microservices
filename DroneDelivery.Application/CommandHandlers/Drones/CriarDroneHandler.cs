@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using DroneDelivery.Application.Commands.Drones;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Validator;
+using DroneDelivery.Shared.Utility;
+using DroneDelivery.Shared.Utility.Messages;
 using Flunt.Notifications;
 using MediatR;
 using System.Linq;
@@ -33,9 +35,9 @@ namespace DroneDelivery.Application.CommandHandlers.Drones
                 return _response;
             }
 
-            if (request.Capacidade > Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS)
+            if (request.Capacidade > Utils.CAPACIDADE_MAXIMA_GRAMAS)
             {
-                _response.AddNotification(new Notification("drone", $"capacidade do drone não pode ser maior que {Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS / 1000} KGs"));
+                _response.AddNotification(new Notification("drone", Erros.ErroDrone_CapacidadeMaxima));
                 return _response;
             }
 

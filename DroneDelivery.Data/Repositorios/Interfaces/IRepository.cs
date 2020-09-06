@@ -1,4 +1,4 @@
-﻿using DroneDelivery.Domain.Core.Domain;
+﻿using DroneDelivery.Shared.Domain.Core.Domain;
 
 namespace DroneDelivery.Data.Repositorios.Interfaces
 {

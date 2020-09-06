@@ -1,6 +1,7 @@
 using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Interfaces;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using Moq;
 using System;
 using Xunit;

@@ -2,8 +2,8 @@
 {
     public enum PagamentoStatus
     {
-        Aguardando,
-        Aprovado,
-        Reprovado
+        Aguardando = 0,
+        Aprovado = 1,
+        Reprovado = 2
     }
 }

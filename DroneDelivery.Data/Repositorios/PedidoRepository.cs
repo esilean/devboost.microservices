@@ -42,7 +42,7 @@ namespace DroneDelivery.Data.Repositorios
 
         public async Task<Pedido> ObterPorIdAsync(Guid pedidoId)
         {
-            return await _context.Pedidos.FirstOrDefaultAsync(x => x.Id == pedidoId);
+            return await _context.Pedidos.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Id == pedidoId);
         }
     }
 }

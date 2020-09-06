@@ -1,25 +1,39 @@
-﻿using DroneDelivery.Pagamento.Application.Dtos;
-using DroneDelivery.Pagamento.Application.Interfaces;
+﻿using DroneDelivery.Pagamento.Application.Commands.Pedidos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DroneDelivery.Pagamento.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PedidosController : ControllerBase
+
+    public class PedidosController : BaseController
     {
-        private readonly IPedidoService _pedidoService;
 
-        public PedidosController(IPedidoService pedidoService)
-        {
-            _pedidoService = pedidoService;
-        }
 
+        /// <summary>
+        /// Receber um pedido para pagamento
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/pedidos
+        ///     {
+        ///        "id": Guid
+        ///        "valor": 999
+        ///     }
+        ///
+        /// </remarks>        
+        /// <param name="command"></param>  
         [HttpPost]
-        public async Task<IActionResult> Adicionar(CriarPedidoDto criarPedidoDto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Criar(CriarPedidoCommand command)
         {
-            await _pedidoService.CriarPedido(criarPedidoDto);
+            var response = await EventBus.SendCommand(command);
+            if (response.HasFails)
+                return BadRequest(response.Fails);
+
             return Ok();
         }
 

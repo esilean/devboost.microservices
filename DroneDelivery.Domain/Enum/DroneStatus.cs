@@ -2,9 +2,8 @@
 {
     public enum DroneStatus
     {
-        Livre = 1,
-        EmManutencao = 2,
-        EmEntrega = 3,
-        EmCarga = 4
+        Livre = 0,
+        EmEntrega = 1,
+        EmManutencao = 2
     }
 }

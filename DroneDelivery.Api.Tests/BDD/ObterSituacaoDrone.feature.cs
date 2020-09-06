@@ -118,7 +118,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("eu solicitar o status dos drones", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 12
- testRunner.Then("a resposta devera ser um statuscode 200OK e retornar os drones", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("a resposta devera ser um statuscode OK e retornar os drones", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();

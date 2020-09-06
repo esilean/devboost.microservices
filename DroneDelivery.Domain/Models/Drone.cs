@@ -1,6 +1,7 @@
-﻿using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Enum;
+﻿using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Interfaces;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using System.Collections.Generic;
 using System.Linq;
 

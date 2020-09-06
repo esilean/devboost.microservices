@@ -1,10 +1,11 @@
 ﻿using DroneDelivery.Application.Commands.Usuarios;
 using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
 using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Validator;
+using DroneDelivery.Shared.Utility.Messages;
 using Flunt.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +41,7 @@ namespace DroneDelivery.Application.CommandHandlers.Usuarios
             var usuario = await _unitOfWork.Usuarios.ObterPorEmailAsync(request.Email);
             if (usuario != null)
             {
-                _response.AddNotification(new Notification("usuário", "Email já foi utilizado"));
+                _response.AddNotification(new Notification("usuário", Erros.ErroCliente_EmailJaExiste));
                 return _response;
             }
 

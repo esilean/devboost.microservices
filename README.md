@@ -2,12 +2,6 @@
 
 Projeto do curso DevBoost - Itaú
 
-## Docker
-
-O projeto pode ser utilizado com `docker-compose`.<br/>
-Entre no diretório [Compose](/Compose) e execute `docker-compose up --build`.<br/>
-Acesse [localhost](http://127.0.0.1:5000/index.html)<br/>
-
 ## Techs:
 
 - ASP.NET Core 3.1

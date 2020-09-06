@@ -4,7 +4,9 @@ using DroneDelivery.Api.Tests.Dtos.Pedidos;
 using DroneDelivery.Application.Commands.Drones;
 using DroneDelivery.Application.Commands.Pedidos;
 using DroneDelivery.Domain.Enum;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -53,6 +55,10 @@ namespace DroneDelivery.Api.Tests.BDD
             var pedidos = JsonConvert.DeserializeObject<PedidosTestDto>(data);
 
             var pedido = pedidos.Pedidos.FirstOrDefault();
+
+            if (pedido == null)
+                throw new Exception("Para rodar os testes de integração é necessário que os dois microserviços sejam executados juntos");
+
             var respPagamentoDto = new CriarRepostaPagamentoDtoTests
             {
                 Id = pedido.Id,
@@ -68,8 +74,8 @@ namespace DroneDelivery.Api.Tests.BDD
             _context.Set(getResponse);
         }
 
-        [Then(@"a resposta devera ser um statuscode (.*)OK e retornar os drones")]
-        public async Task EntaoARespostaDeveraSerUmStatuscodeOKERetornarOsDrones(int p0)
+        [Then(@"a resposta devera ser um statuscode OK e retornar os drones")]
+        public async Task EntaoARespostaDeveraSerUmStatuscodeOKERetornarOsDrones()
         {
             var response = _context.Get<HttpResponseMessage>();
             var data = await response.Content.ReadAsStringAsync();

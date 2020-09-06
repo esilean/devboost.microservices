@@ -116,7 +116,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("eu solicitar a criação do pedido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 11
- testRunner.Then("o pedido deverá ser cadastrado a resposta devera ser um status code 200OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("o pedido deverá ser cadastrado a resposta devera ser um status code OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -1,29 +1,71 @@
-﻿using DroneDelivery.Pagamento.Application.Dtos;
-using DroneDelivery.Pagamento.Application.Interfaces;
+﻿using DroneDelivery.Pagamento.Application.Commands.Pagamentos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace DroneDelivery.Pagamento.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PagamentosController : ControllerBase
+
+    public class PagamentosController : BaseController
     {
 
-        private readonly IPedidoPagamentoService _pedidoPagamentoService;
-
-        public PagamentosController(IPedidoPagamentoService pedidoPagamentoService)
-        {
-            _pedidoPagamentoService = pedidoPagamentoService;
-        }
-
+        /// <summary>
+        /// Realizar o pagamento de um pedido
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/pagamentos
+        ///     {
+        ///        "numeroCartao": "4242424242424242"
+        ///        "vencimentoCartao": "2020-12-31"
+        ///        "codigoSeguranca": 123
+        ///     }
+        ///
+        /// </remarks>        
+        /// <param name="pedidoId"></param>  
+        /// <param name="command"></param>  
         [HttpPost("{pedidoId}")]
-        public async Task<IActionResult> RealizarPagamento(Guid pedidoId, CriarPedidoPagamentoDto criarPedidoPagamentoDto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> RealizarPagamento(Guid pedidoId, CriarPagamentoCommand command)
         {
-            await _pedidoPagamentoService.RealizarPagamento(pedidoId, criarPedidoPagamentoDto);
+            command.MarcarPedidoId(pedidoId);
+            var response = await EventBus.SendCommand(command);
+            if (response.HasFails)
+                return BadRequest(response.Fails);
 
             return Ok();
         }
+
+        /// <summary>
+        /// Webhook para receber reposta do gateway de pagamento
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/pagamentos/webhook
+        ///     {
+        ///        "pedidoId": Guid,
+        ///        "status": 1
+        ///     }
+        ///
+        /// </remarks>        
+        /// <param name="command"></param>  
+        [HttpPost("webhook")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Webhook(WebhookPagamentoCommand command)
+        {
+            var response = await EventBus.SendCommand(command);
+            if (response.HasFails)
+                return BadRequest(response.Fails);
+
+            return Ok();
+        }
+
     }
 }

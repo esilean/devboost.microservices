@@ -6,7 +6,8 @@ using DroneDelivery.Data.Repositorios.Interfaces;
 using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Interfaces;
 using DroneDelivery.Domain.Models;
-using DroneDelivery.Utility.Messages;
+using DroneDelivery.Shared.Domain.Core.Enums;
+using DroneDelivery.Shared.Utility.Messages;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.AutoMock;
@@ -83,7 +84,7 @@ namespace DroneDelivery.Application.Tests.CommandHandlers.Pedidos
             // Assert
             Assert.True(responseResult.HasFails);
             Assert.True(responseResult.Fails.Count() == 1);
-            Assert.NotNull(responseResult.Fails.Select(x => x.Message == PedidoMessage.Erro_DroneNaoCadastrado));
+            Assert.NotNull(responseResult.Fails.Select(x => x.Message == Erros.ErroDrone_NaoCadastrado));
         }
 
 

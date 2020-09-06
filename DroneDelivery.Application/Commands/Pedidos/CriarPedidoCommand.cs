@@ -1,7 +1,7 @@
-﻿using DroneDelivery.Domain.Core.Commands;
+﻿using DroneDelivery.Shared.Domain.Core.Commands;
+using DroneDelivery.Shared.Utility;
 using Flunt.Validations;
 using Newtonsoft.Json;
-using System;
 
 namespace DroneDelivery.Application.Commands.Pedidos
 {
@@ -32,7 +32,7 @@ namespace DroneDelivery.Application.Commands.Pedidos
 
             AddNotifications(new Contract()
                 .Requires()
-                .IsLowerOrEqualsThan(Peso, Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS, nameof(Peso), $"O Peso tem que ser menor ou igual a {Utility.Utils.CAPACIDADE_MAXIMA_GRAMAS / 1000} KGs"));
+                .IsLowerOrEqualsThan(Peso, Utils.CAPACIDADE_MAXIMA_GRAMAS, nameof(Peso), $"O Peso tem que ser menor ou igual a {Utils.CAPACIDADE_MAXIMA_GRAMAS / 1000} KGs"));
 
         }
     }

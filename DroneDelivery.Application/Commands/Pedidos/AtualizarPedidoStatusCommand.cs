@@ -1,5 +1,5 @@
-﻿using DroneDelivery.Domain.Core.Commands;
-using DroneDelivery.Domain.Enum;
+﻿using DroneDelivery.Shared.Domain.Core.Commands;
+using DroneDelivery.Shared.Domain.Core.Enums;
 using Flunt.Validations;
 using Newtonsoft.Json;
 using System;
@@ -20,10 +20,9 @@ namespace DroneDelivery.Application.Commands.Pedidos
 
         public void Validate()
         {
-
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotEmpty(Id, nameof(Id), "O PedidoId não pode ser vazio"));
+                .IsNotEmpty(Id, nameof(Id), "O Id do Pedido não pode ser vazio"));
         }
     }
 }

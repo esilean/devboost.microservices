@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DroneDelivery.Pagamento.Data\DroneDelivery.Pagamento.Data.csproj" />
     <ProjectReference Include="..\DroneDelivery.Pagamento.Domain\DroneDelivery.Pagamento.Domain.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Utility\DroneDelivery.Shared.Utility.csproj" />
   </ItemGroup>
 
 </Project>

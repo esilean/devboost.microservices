@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DroneDelivery.Application\DroneDelivery.Application.csproj" />
+    <ProjectReference Include="..\DroneDelivery.Shared.Infra\DroneDelivery.Shared.Infra.csproj" />
   </ItemGroup>
 
 </Project>

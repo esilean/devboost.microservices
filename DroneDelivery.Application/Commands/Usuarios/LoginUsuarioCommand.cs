@@ -1,4 +1,4 @@
-﻿using DroneDelivery.Domain.Core.Commands;
+﻿using DroneDelivery.Shared.Domain.Core.Commands;
 using Flunt.Validations;
 using Newtonsoft.Json;
 

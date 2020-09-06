@@ -2,10 +2,11 @@
 using DroneDelivery.Application.Dtos.Drone;
 using DroneDelivery.Application.Queries.Drones;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
-using DroneDelivery.Domain.Models;
 using DroneDelivery.Domain.Enum;
+using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Enums;
+using DroneDelivery.Shared.Domain.Core.Validator;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,18 +1,15 @@
+using DroneDelivery.Pagamento.Api.Documentation;
 using DroneDelivery.Pagamento.Api.Middeware;
-using DroneDelivery.Pagamento.Application.Interfaces;
-using DroneDelivery.Pagamento.Application.Services;
 using DroneDelivery.Pagamento.Data.Data;
-using DroneDelivery.Pagamento.Data.Repositorios;
-using DroneDelivery.Pagamento.Data.Repositorios.Interfaces;
-using DroneDelivery.Shared.Infra;
-
+using DroneDelivery.Pagamento.IOC;
+using DroneDelivery.Shared.Infra.Clients;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace DroneDelivery.Pagamento.Api
 {
@@ -42,11 +39,12 @@ namespace DroneDelivery.Pagamento.Api
                 opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddMediatR(typeof(Startup).Assembly);
+
             ConfigureServices(services);
         }
 
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -55,22 +53,18 @@ namespace DroneDelivery.Pagamento.Api
                 opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPedidoService, PedidoService>();
-            services.AddScoped<IPedidoPagamentoService, PedidoPagamentoService>();
 
-            services.AddScoped<IEnviarRespostaPagamento, EnviarRespostaPagamento>();
+            //Adicionar acesso aos endpoint do microservico de entregas
+            HttpPedidoClient.Registrar(services, Configuration["UrlBasePedido"]);
 
-            services.AddHttpClient("pedidos", opts =>
-            {
-                opts.BaseAddress = new Uri(Configuration["UrlBasePedido"]);
-            });
+            Swagger.Configurar(services);
+            DependencyContainer.RegisterServices(services);
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
@@ -79,6 +73,13 @@ namespace DroneDelivery.Pagamento.Api
             {
                 //app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Drone Delivery Pagamento V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 

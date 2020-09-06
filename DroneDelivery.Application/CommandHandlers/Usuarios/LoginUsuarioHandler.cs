@@ -1,9 +1,10 @@
 ﻿using DroneDelivery.Application.Commands.Usuarios;
 using DroneDelivery.Application.Interfaces;
 using DroneDelivery.Data.Repositorios.Interfaces;
-using DroneDelivery.Domain.Core.Domain;
-using DroneDelivery.Domain.Core.Validator;
 using DroneDelivery.Domain.Models;
+using DroneDelivery.Shared.Domain.Core.Domain;
+using DroneDelivery.Shared.Domain.Core.Validator;
+using DroneDelivery.Shared.Utility.Messages;
 using Flunt.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -40,14 +41,14 @@ namespace DroneDelivery.Application.CommandHandlers.Usuarios
             var usuario = await _unitOfWork.Usuarios.ObterPorEmailAsync(request.Email);
             if (usuario == null)
             {
-                _response.AddNotification(new Notification("usuario", "Usuário ou senha inválidos"));
+                _response.AddNotification(new Notification("usuario", Erros.ErroCliente_UsuarioOuSenhaInvalido));
                 return _response;
             }
 
             var passwordResult = _passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, request.Password);
             if (passwordResult == PasswordVerificationResult.Failed)
             {
-                _response.AddNotification(new Notification("usuario", "Usuário ou senha inválidos"));
+                _response.AddNotification(new Notification("usuario", Erros.ErroCliente_UsuarioOuSenhaInvalido));
                 return _response;
             }
 
