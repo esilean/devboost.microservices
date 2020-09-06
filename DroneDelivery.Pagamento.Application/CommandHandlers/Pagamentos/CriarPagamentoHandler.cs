@@ -65,18 +65,21 @@ namespace DroneDelivery.Pagamento.Application.CommandHandlers.Pagamentos
                 return _response;
             }
 
-            pedido.AdicionarPagamento(pagamento);
-            pedido.AtualizarStatus(PedidoStatus.ProcessandoPagamento);
+
 
             /******************/
             /******************/
             /******************/
             /* MOCK - Gateway de Pagamento*/
-            _gatewayPagamento.EnviarParaPagamento();
+            var token = await _gatewayPagamento.EnviarParaPagamento(pedido);
+            pagamento.AdicionarToken(token);
 
             /******************/
             /******************/
             /******************/
+
+            pedido.AdicionarPagamento(pagamento);
+            pedido.AtualizarStatus(PedidoStatus.ProcessandoPagamento);
 
             //publica o evento para o bus
             await _eventBus.Publish(new PedidoStatusAtualizadoEvent(pedido.Id, pedido.Status));

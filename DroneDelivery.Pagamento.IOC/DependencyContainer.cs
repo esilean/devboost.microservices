@@ -10,7 +10,7 @@ using DroneDelivery.Pagamento.Gateway;
 using DroneDelivery.Shared.Bus;
 using DroneDelivery.Shared.Domain.Core.Bus;
 using DroneDelivery.Shared.Domain.Core.Domain;
-using DroneDelivery.Shared.Infra.Eventos;
+using DroneDelivery.Shared.Infra.HttpFactories;
 using DroneDelivery.Shared.Infra.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +25,8 @@ namespace DroneDelivery.Pagamento.IOC
             services.AddScoped<IEventBus, MediatorHandler>();
 
             //events
-            services.AddScoped<IPedidoPagamentoEvent, PedidoPagamentoEvent>();
-            services.AddScoped<IPedidoStatusEvent, PedidoStatusEvent>();
+            services.AddScoped<IPagamentoHttpFactory, PagamentoHttpFactory>();
+            services.AddScoped<IPedidoHttpFactory, PedidoHttpFactory>();
 
             //commands
             services.AddScoped<IRequestHandler<CriarPedidoCommand, ResponseResult>, CriarPedidoHandler>();

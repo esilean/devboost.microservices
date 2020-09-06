@@ -4,19 +4,19 @@ using DroneDelivery.Shared.Utility.Events;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace DroneDelivery.Shared.Infra.Eventos
+namespace DroneDelivery.Shared.Infra.HttpFactories
 {
-    public class PedidoPagamentoEvent : IPedidoPagamentoEvent
+    public class PagamentoHttpFactory : IPagamentoHttpFactory
     {
 
         private readonly IHttpClientFactory _factory;
 
-        public PedidoPagamentoEvent(IHttpClientFactory factory)
+        public PagamentoHttpFactory(IHttpClientFactory factory)
         {
             _factory = factory;
         }
 
-        public async Task<bool> EnviarPedido(PedidoCriadoEvent @event)
+        public async Task<bool> EnviarPedidoParaPagamento(PedidoCriadoEvent @event)
         {
 
             var client = _factory.CreateClient(HttpClientName.PagamentoEndPoint);

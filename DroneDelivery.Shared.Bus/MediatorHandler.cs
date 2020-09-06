@@ -14,17 +14,17 @@ namespace DroneDelivery.Shared.Bus
     {
 
         private readonly IMediator _mediator;
-        private readonly IPedidoPagamentoEvent _pedidoPagamentoEvent;
-        private readonly IPedidoStatusEvent _pedidoStatusEvent;
+        private readonly IPagamentoHttpFactory _pagamentoHttpFactory;
+        private readonly IPedidoHttpFactory _pedidoHttpFactory;
 
         public MediatorHandler(
                                 IMediator mediator,
-                                IPedidoPagamentoEvent pedidoPagamentoEvent,
-                                IPedidoStatusEvent pedidoStatusEvent)
+                                IPagamentoHttpFactory pagamentoHttpFactory,
+                                IPedidoHttpFactory pedidoHttpFactory)
         {
             _mediator = mediator;
-            _pedidoPagamentoEvent = pedidoPagamentoEvent;
-            _pedidoStatusEvent = pedidoStatusEvent;
+            _pagamentoHttpFactory = pagamentoHttpFactory;
+            _pedidoHttpFactory = pedidoHttpFactory;
         }
 
         public Task<ResponseResult> SendCommand<T>(T command) where T : Command
@@ -42,9 +42,9 @@ namespace DroneDelivery.Shared.Bus
             var eventType = @event.GetType();
 
             if (eventType == typeof(PedidoCriadoEvent))
-                await _pedidoPagamentoEvent.EnviarPedido(@event as PedidoCriadoEvent);
+                await _pagamentoHttpFactory.EnviarPedidoParaPagamento(@event as PedidoCriadoEvent);
             else if (eventType == typeof(PedidoStatusAtualizadoEvent))
-                await _pedidoStatusEvent.AtualizarStatus(@event as PedidoStatusAtualizadoEvent);
+                await _pedidoHttpFactory.AtualizarPedidoStatus(@event as PedidoStatusAtualizadoEvent);
 
         }
     }

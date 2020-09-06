@@ -4,18 +4,18 @@ using DroneDelivery.Shared.Utility.Events;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace DroneDelivery.Shared.Infra.Eventos
+namespace DroneDelivery.Shared.Infra.HttpFactories
 {
-    public class PedidoStatusEvent : IPedidoStatusEvent
+    public class PedidoHttpFactory : IPedidoHttpFactory
     {
         private readonly IHttpClientFactory _factory;
 
-        public PedidoStatusEvent(IHttpClientFactory factory)
+        public PedidoHttpFactory(IHttpClientFactory factory)
         {
             _factory = factory;
         }
 
-        public async Task<bool> AtualizarStatus(PedidoStatusAtualizadoEvent @event)
+        public async Task<bool> AtualizarPedidoStatus(PedidoStatusAtualizadoEvent @event)
         {
 
             var client = _factory.CreateClient(HttpClientName.PedidoEndPoint);

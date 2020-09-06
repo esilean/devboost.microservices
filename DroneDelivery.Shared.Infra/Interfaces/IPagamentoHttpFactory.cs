@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace DroneDelivery.Shared.Infra.Interfaces
 {
-    public interface IPedidoPagamentoEvent
+    public interface IPagamentoHttpFactory
     {
-        Task<bool> EnviarPedido(PedidoCriadoEvent @event);
+        Task<bool> EnviarPedidoParaPagamento(PedidoCriadoEvent @event);
     }
 }

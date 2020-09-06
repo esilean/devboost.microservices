@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace DroneDelivery.Shared.Infra.Interfaces
 {
-    public interface IPedidoStatusEvent
+    public interface IPedidoHttpFactory
     {
-        Task<bool> AtualizarStatus(PedidoStatusAtualizadoEvent @event);
+        Task<bool> AtualizarPedidoStatus(PedidoStatusAtualizadoEvent @event);
     }
 }

@@ -89,8 +89,8 @@ namespace DroneDelivery.Application.Tests.CommandHandlers.Pedidos
                     .Setup(p => p.Usuarios.ObterPorIdAsync(usuarioId))
                     .Returns(Task.FromResult(usuario));
 
-            _mocker.GetMock<IPedidoPagamentoEvent>()
-                    .Setup(p => p.EnviarPedido(It.IsAny<PedidoCriadoEvent>()));
+            _mocker.GetMock<IPagamentoHttpFactory>()
+                    .Setup(p => p.EnviarPedidoParaPagamento(It.IsAny<PedidoCriadoEvent>()));
 
             //adicionar pedido
             _mocker.GetMock<IUnitOfWork>()

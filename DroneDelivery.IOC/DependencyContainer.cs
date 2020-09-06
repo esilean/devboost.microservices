@@ -24,7 +24,7 @@ using DroneDelivery.Infra.TempoEntrega;
 using DroneDelivery.Shared.Bus;
 using DroneDelivery.Shared.Domain.Core.Bus;
 using DroneDelivery.Shared.Domain.Core.Domain;
-using DroneDelivery.Shared.Infra.Eventos;
+using DroneDelivery.Shared.Infra.HttpFactories;
 using DroneDelivery.Shared.Infra.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -40,8 +40,8 @@ namespace DroneDelivery.IOC
             //mediator
             services.AddScoped<IEventBus, MediatorHandler>();
             //events
-            services.AddScoped<IPedidoPagamentoEvent, PedidoPagamentoEvent>();
-            services.AddScoped<IPedidoStatusEvent, PedidoStatusEvent>();
+            services.AddScoped<IPagamentoHttpFactory, PagamentoHttpFactory>();
+            services.AddScoped<IPedidoHttpFactory, PedidoHttpFactory>();
 
 
             //lib calcular tempo entrega 

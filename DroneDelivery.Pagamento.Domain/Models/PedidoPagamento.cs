@@ -24,6 +24,8 @@ namespace DroneDelivery.Pagamento.Domain.Models
 
         public DateTime? DataConfirmacao { get; set; }
 
+        public string Token { get; private set; }
+
 
         protected PedidoPagamento() { }
 
@@ -69,6 +71,11 @@ namespace DroneDelivery.Pagamento.Domain.Models
         {
             DataConfirmacao = DateTime.Now;
             Status = PagamentoStatus.Reprovado;
+        }
+
+        public void AdicionarToken(string token)
+        {
+            Token = token;
         }
 
     }

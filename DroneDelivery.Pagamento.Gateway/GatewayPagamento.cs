@@ -1,19 +1,39 @@
 ﻿using DroneDelivery.Pagamento.Application.Interfaces;
-using Microsoft.Extensions.Logging;
+using DroneDelivery.Pagamento.Domain.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DroneDelivery.Pagamento.Gateway
 {
     public class GatewayPagamento : IGatewayPagamento
     {
-        private readonly ILogger<GatewayPagamento> _logger;
-        public GatewayPagamento(ILogger<GatewayPagamento> logger)
+
+        private readonly HttpClient _httpClient;
+
+        public GatewayPagamento()
         {
-            _logger = logger;
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new System.Uri("https://demo8366776.mockable.io/")
+            };
         }
 
-        public void EnviarParaPagamento()
+        public async Task<string> EnviarParaPagamento(Pedido pedido)
         {
-            _logger.LogInformation("Enviando para pagamento");
+            var response = await _httpClient.GetAsync("gateway-pgdrone");
+            if (!response.IsSuccessStatusCode)
+                return default;
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<TokenGateway>(result).Token;
+
         }
+    }
+
+    public class TokenGateway
+    {
+        public string Token { get; set; }
     }
 }

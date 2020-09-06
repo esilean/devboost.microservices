@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using DroneDelivery.Pagamento.Domain.Models;
+using System.Threading.Tasks;
 
 namespace DroneDelivery.Pagamento.Application.Interfaces
 {
     public interface IGatewayPagamento
     {
-        void EnviarParaPagamento();
+        Task<string> EnviarParaPagamento(Pedido pedido);
     }
 }
