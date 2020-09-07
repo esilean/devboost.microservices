@@ -39,7 +39,15 @@ namespace DroneDelivery.Pagamento.Api
                 opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddMediatR(typeof(Startup).Assembly);
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DronePgtoDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             ConfigureServices(services);
         }
@@ -47,21 +55,15 @@ namespace DroneDelivery.Pagamento.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContext<DronePgtoDbContext>(opts =>
-            {
-                opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
             services.AddControllers().AddNewtonsoftJson();
 
+            services.AddMediatR(typeof(Startup).Assembly);
 
             //Adicionar acesso aos endpoint do microservico de entregas
             HttpPedidoClient.Registrar(services, Configuration["UrlBasePedido"]);
 
             Swagger.Configurar(services);
             DependencyContainer.RegisterServices(services);
-
         }
 
 

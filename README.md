@@ -1,6 +1,14 @@
-# DevBoost - Drone Delivery
+# DevBoost - Drone Delivery - Microservices
 
 Projeto do curso DevBoost - Itaú
+
+## Docker
+
+O projeto pode ser utilizado com `docker-compose`.<br/>
+Entre no diretório [Compose](/Compose) e execute `docker-compose up --build`.<br/>
+Acesse microsserviço de Entrega - [http://127.0.0.1:5005/index.html](http://127.0.0.1:5005/index.html)<br/>
+Acesse microsserviço de Pagamento - [http://127.0.0.1:5003/index.html](http://127.0.0.1:5003/index.html)<br/>
+Acesse MSSql - localhost,1401<br/>
 
 ## Techs:
 
@@ -11,10 +19,12 @@ Projeto do curso DevBoost - Itaú
 - AutoMapper
 - MediatR
 - Swagger UI with JWT support
+- HttpClient para comunicação entre microsserviços
 
 ## Arquitetura:
 
 - SOLID and Clean Code
+- Arquitetura Hexagonal
 - DDD
 - CQRS
 - Unit of Work

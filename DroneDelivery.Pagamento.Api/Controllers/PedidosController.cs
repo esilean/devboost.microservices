@@ -18,7 +18,7 @@ namespace DroneDelivery.Pagamento.Api.Controllers
         ///
         ///     POST /api/pedidos
         ///     {
-        ///        "id": Guid
+        ///        "id": "2e4f41f4-dfd2-4464-8896-d39e22315cdd",
         ///        "valor": 999
         ///     }
         ///

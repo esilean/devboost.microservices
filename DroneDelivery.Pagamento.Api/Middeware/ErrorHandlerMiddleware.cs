@@ -28,6 +28,7 @@ namespace DroneDelivery.Pagamento.Api.Middeware
                 var response = new ResponseResult();
                 response.AddNotification(new Notification("erro interno", (ex.InnerException != null) ? ex.InnerException.Message : ex.Message));
 
+                context.Response.StatusCode = 500;
                 context.Response.ContentType = "application/json";
                 var result = JsonSerializer.Serialize(
                     new

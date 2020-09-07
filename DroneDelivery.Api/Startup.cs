@@ -51,6 +51,16 @@ namespace DroneDelivery.Api
             ConfigureServices(services);
         }
 
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DroneDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            ConfigureServices(services);
+        }
+
 
         public void ConfigureServices(IServiceCollection services)
         {

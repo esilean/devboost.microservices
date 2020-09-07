@@ -18,8 +18,8 @@ namespace DroneDelivery.Pagamento.Api.Controllers
         ///
         ///     POST /api/pagamentos
         ///     {
-        ///        "numeroCartao": "4242424242424242"
-        ///        "vencimentoCartao": "2020-12-31"
+        ///        "numeroCartao": "4242424242424242",
+        ///        "vencimentoCartao": "2025-12-31",
         ///        "codigoSeguranca": 123
         ///     }
         ///
@@ -48,7 +48,7 @@ namespace DroneDelivery.Pagamento.Api.Controllers
         ///
         ///     POST /api/pagamentos/webhook
         ///     {
-        ///        "pedidoId": Guid,
+        ///        "pedidoId": "2e4f41f4-dfd2-4464-8896-d39e22315cdd",
         ///        "status": 1
         ///     }
         ///

@@ -1,0 +1,43 @@
+version: "3.5"
+
+networks:
+  drone-network:
+    driver: bridge
+
+services:
+  pedido-api:
+    build:
+      context: ../
+      dockerfile: DroneDelivery.Api/Dockerfile
+    container_name: pedido-api
+    restart: unless-stopped
+    ports:
+      - "5005:80"
+    networks:
+      - drone-network
+    depends_on:
+      - db
+  pagamento-api:
+    build:
+      context: ../
+      dockerfile: DroneDelivery.Pagamento.Api/Dockerfile
+    container_name: pagamento-api
+    restart: unless-stopped
+    ports:
+      - "5003:80"
+    networks:
+      - drone-network
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: db
+    restart: on-failure
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=pass123!"
+    ports:
+      - "1401:1433"
+    networks:
+      - drone-network
