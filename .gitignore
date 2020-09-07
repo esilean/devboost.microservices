@@ -1,6 +1,5 @@
 # Application
 *.db
-appsettings.Production.json
 publish
 PublishProfiles
 ServiceDependencies
