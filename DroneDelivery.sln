@@ -91,7 +91,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Pagamento.IOC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Shared.Utility", "DroneDelivery.Shared.Utility\DroneDelivery.Shared.Utility.csproj", "{E3BB5F2D-C0D2-4B6A-8332-CD4EB1DA23E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Pagamento.Gateway", "DroneDelivery.Pagamento.Gateway\DroneDelivery.Pagamento.Gateway.csproj", "{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Pagamento.Gateway", "DroneDelivery.Pagamento.Gateway\DroneDelivery.Pagamento.Gateway.csproj", "{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.APIGateway", "DroneDelivery.APIGateway\DroneDelivery.APIGateway.csproj", "{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +193,10 @@ Global
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,6 +244,7 @@ Global
 		{12D50FEB-5C8B-4062-B42D-92AE0EE909F6} = {43447475-99B2-4B1D-A170-FB3037302F12}
 		{E3BB5F2D-C0D2-4B6A-8332-CD4EB1DA23E1} = {356581CB-AFF8-44E4-9CDD-04C60521456D}
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC} = {43447475-99B2-4B1D-A170-FB3037302F12}
+		{9F1853BA-2C5F-4519-83FE-C621FEE8F7C4} = {356581CB-AFF8-44E4-9CDD-04C60521456D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47DA7E87-7CF5-4C6C-A092-C9675E83C77B}
