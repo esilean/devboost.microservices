@@ -11,8 +11,13 @@ namespace DroneDelivery.Pagamento.Api.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private IEventBus _eventBus;
-        protected IEventBus EventBus => _eventBus ??= HttpContext.RequestServices.GetService<IEventBus>();
+
+        protected readonly IEventBus EventBus;
+
+        public BaseController(IEventBus eventBus)
+        {
+            EventBus = eventBus;
+        }
 
     }
 }

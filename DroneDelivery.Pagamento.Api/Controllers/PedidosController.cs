@@ -1,4 +1,5 @@
 ﻿using DroneDelivery.Pagamento.Application.Commands.Pedidos;
+using DroneDelivery.Shared.Domain.Core.Bus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,6 +9,10 @@ namespace DroneDelivery.Pagamento.Api.Controllers
 
     public class PedidosController : BaseController
     {
+
+        public PedidosController(IEventBus eventBus) : base(eventBus)
+        {
+        }
 
 
         /// <summary>

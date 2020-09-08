@@ -1,4 +1,5 @@
 ﻿using DroneDelivery.Pagamento.Application.Commands.Pagamentos;
+using DroneDelivery.Shared.Domain.Core.Bus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,10 @@ namespace DroneDelivery.Pagamento.Api.Controllers
 
     public class PagamentosController : BaseController
     {
+
+        public PagamentosController(IEventBus eventBus) : base(eventBus)
+        {
+        }
 
         /// <summary>
         /// Realizar o pagamento de um pedido
@@ -30,7 +35,7 @@ namespace DroneDelivery.Pagamento.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RealizarPagamento(Guid pedidoId, CriarPagamentoCommand command)
+        public async Task<ActionResult> RealizarPagamento(Guid pedidoId, CriarPagamentoCommand command)
         {
             command.MarcarPedidoId(pedidoId);
             var response = await EventBus.SendCommand(command);
