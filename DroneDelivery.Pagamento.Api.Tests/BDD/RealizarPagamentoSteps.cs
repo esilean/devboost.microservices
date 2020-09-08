@@ -17,7 +17,9 @@ namespace DroneDelivery.Pagamento.Api.Tests.BDD
         private readonly ScenarioContext _context;
         private readonly IntegrationTestsFixture<Startup> _testsFixture;
 
-        public RealizarPagamentoSteps(ScenarioContext context, IntegrationTestsFixture<Startup> testsFixture)
+        public RealizarPagamentoSteps(
+                ScenarioContext context,
+                IntegrationTestsFixture<Startup> testsFixture)
         {
             _context = context;
             _testsFixture = testsFixture;
@@ -26,10 +28,11 @@ namespace DroneDelivery.Pagamento.Api.Tests.BDD
         [Given(@"Que eu tenha um pedido receba um NumeroCartao: '(.*)' Vencimento: '(.*)' CodigoSeguranca: '(.*)'")]
         public async Task DadoQueEuTenhaUmPedidoRecebaUmNumeroCartaoVencimentoCodigoSeguranca(string p0, string p1, int p2)
         {
+            _context.Pending();
+
             var command = new CriarPedidoCommand(Guid.NewGuid(), 999);
 
             await _testsFixture.Client.PostAsJsonAsync("/api/pedidos", command);
-
 
             _context.Add("pedido", command);
             _context.Add("numeroCartao", p0);
@@ -41,6 +44,8 @@ namespace DroneDelivery.Pagamento.Api.Tests.BDD
         [When(@"eu solicitar a realização do pagamento")]
         public async Task QuandoEuSolicitarARealizacaoDoPagamento()
         {
+            _context.Pending();
+
             var numeroCartao = _context.Get<string>("numeroCartao");
             var vencimentoCartao = _context.Get<DateTime>("vencimento");
             var codigoSeguranca = _context.Get<int>("codigoSeguranca");
@@ -56,6 +61,8 @@ namespace DroneDelivery.Pagamento.Api.Tests.BDD
         [Then(@"o pedido deverá ser pago a resposta devera ser um status code OK")]
         public void EntaoOPedidoDeveraSerPagoARespostaDeveraSerUmStatusCodeOK()
         {
+            _context.Pending();
+
             var response = _context.Get<HttpResponseMessage>();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }

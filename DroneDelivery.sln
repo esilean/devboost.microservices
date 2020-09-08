@@ -91,7 +91,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Pagamento.IOC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Shared.Utility", "DroneDelivery.Shared.Utility\DroneDelivery.Shared.Utility.csproj", "{E3BB5F2D-C0D2-4B6A-8332-CD4EB1DA23E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Pagamento.Gateway", "DroneDelivery.Pagamento.Gateway\DroneDelivery.Pagamento.Gateway.csproj", "{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DroneDelivery.Pagamento.Gateway", "DroneDelivery.Pagamento.Gateway\DroneDelivery.Pagamento.Gateway.csproj", "{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{4463E45E-6342-4056-BE49-32B1B10EC337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneDelivery.Pagamento.Application.Tests", "DroneDelivery.Pagamento.Application.Tests\DroneDelivery.Pagamento.Application.Tests.csproj", "{41D3DA73-163A-49EB-B17A-8F040FA4DD1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +195,10 @@ Global
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D3DA73-163A-49EB-B17A-8F040FA4DD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D3DA73-163A-49EB-B17A-8F040FA4DD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D3DA73-163A-49EB-B17A-8F040FA4DD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D3DA73-163A-49EB-B17A-8F040FA4DD1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,6 +246,8 @@ Global
 		{12D50FEB-5C8B-4062-B42D-92AE0EE909F6} = {43447475-99B2-4B1D-A170-FB3037302F12}
 		{E3BB5F2D-C0D2-4B6A-8332-CD4EB1DA23E1} = {356581CB-AFF8-44E4-9CDD-04C60521456D}
 		{AB2C75B7-0C6D-4581-BF57-A5C361A607CC} = {43447475-99B2-4B1D-A170-FB3037302F12}
+		{4463E45E-6342-4056-BE49-32B1B10EC337} = {64210172-DE3B-41B4-981F-348BA05DBE9F}
+		{41D3DA73-163A-49EB-B17A-8F040FA4DD1E} = {4463E45E-6342-4056-BE49-32B1B10EC337}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47DA7E87-7CF5-4C6C-A092-C9675E83C77B}
