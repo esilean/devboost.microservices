@@ -43,6 +43,8 @@ namespace DroneDelivery.Data.Tests.Config
             context.Database.EnsureCreated();
 
             var usuario = Usuario.Criar("test", "test@test.com", -23.35566, -46.36554, UsuarioRole.Cliente);
+            usuario.AdicionarPassword("123");
+            usuario.AdicionarRefreshToken("refreshtoken", DateTime.Now.AddDays(1));
             context.Add(usuario);
 
             var drone1 = Drone.Criar(12000, 3, 35, 100, DroneStatus.Livre);

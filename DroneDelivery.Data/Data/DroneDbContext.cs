@@ -1,4 +1,5 @@
-﻿using DroneDelivery.Domain.Models;
+﻿using DroneDelivery.Data.Data.EntityConfiguration;
+using DroneDelivery.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
@@ -17,7 +18,13 @@ namespace DroneDelivery.Data.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Drone> Drones { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<HistoricoPedido> HistoricoPedidos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new UsuarioEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DroneEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PedidoEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new HistoricoPedidosEntityTypeConfiguration());
+        }
     }
 }

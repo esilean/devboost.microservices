@@ -9,8 +9,8 @@ namespace DroneDelivery.Domain.Models
 {
     public class Drone : Entity, IAggregateRoot
     {
-        private readonly List<Pedido> _pedidos = new List<Pedido>();
 
+        private readonly List<Pedido> _pedidos = new List<Pedido>();
 
         public double Capacidade { get; private set; }
 

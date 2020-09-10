@@ -4,6 +4,7 @@ using DroneDelivery.Data.Repositorios.Interfaces;
 using DroneDelivery.Data.Tests.Config;
 using DroneDelivery.Domain.Enum;
 using DroneDelivery.Domain.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -26,6 +27,8 @@ namespace DroneDelivery.Data.Tests.Repositorios
         {
             //Arrange
             var usuario = Usuario.Criar("test", "test@email", 0, 0, UsuarioRole.Cliente);
+            usuario.AdicionarPassword("password");
+            usuario.AdicionarRefreshToken("refreshToken", DateTime.Now.AddDays(1));
             await _context.AddAsync(usuario);
 
             var pedido = Pedido.Criar(999, 1000, usuario);
@@ -44,6 +47,8 @@ namespace DroneDelivery.Data.Tests.Repositorios
         {
             //Arrange
             var usuario = Usuario.Criar("test", "test@email", 0, 0, UsuarioRole.Cliente);
+            usuario.AdicionarPassword("password");
+            usuario.AdicionarRefreshToken("refreshToken", DateTime.Now.AddDays(1));
             await _context.AddAsync(usuario);
 
             var pedido1 = Pedido.Criar(123, 1000, usuario);
@@ -67,6 +72,8 @@ namespace DroneDelivery.Data.Tests.Repositorios
         {
             //Arrange
             var usuario = Usuario.Criar("test", "test@email", 0, 0, UsuarioRole.Cliente);
+            usuario.AdicionarPassword("password");
+            usuario.AdicionarRefreshToken("refreshToken", DateTime.Now.AddDays(1));
             await _context.AddAsync(usuario);
 
             var drone = Drone.Criar(12000, 5, 40, 100, DroneStatus.EmEntrega);

@@ -1,26 +1,27 @@
 ﻿using DroneDelivery.Shared.Domain.Core.Domain;
 using DroneDelivery.Shared.Domain.Core.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace DroneDelivery.Domain.Models
 {
     public class Pedido : Entity, IAggregateRoot
     {
 
-        public Guid? UsuarioId { get; private set; }
+        private readonly List<HistoricoPedido> _historicoPedidos = new List<HistoricoPedido>();
+
+        public Guid UsuarioId { get; private set; }
         public Usuario Usuario { get; private set; }
 
         public double Peso { get; private set; }
-
         public DateTime DataPedido { get; private set; }
-
         public double Valor { get; private set; }
-
         public PedidoStatus Status { get; private set; }
 
         public Guid? DroneId { get; private set; }
-
         public Drone Drone { get; private set; }
+
+        public IReadOnlyCollection<HistoricoPedido> HistoricoPedidos => _historicoPedidos;
 
         protected Pedido() { }
 
@@ -46,6 +47,11 @@ namespace DroneDelivery.Domain.Models
         public void AssociarDrone(Drone drone)
         {
             Drone = drone;
+        }
+
+        public void CriarHistorico(HistoricoPedido historicoPedido)
+        {
+            _historicoPedidos.Add(historicoPedido);
         }
 
     }

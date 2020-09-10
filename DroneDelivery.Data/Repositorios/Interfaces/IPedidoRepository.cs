@@ -14,8 +14,6 @@ namespace DroneDelivery.Data.Repositorios.Interfaces
 
         Task<Pedido> ObterPorIdAsync(Guid pedidoId);
 
-        Task CriarHistoricoPedidoAsync(IEnumerable<Pedido> pedidos);
-
         Task AdicionarAsync(Pedido drone);
 
     }
