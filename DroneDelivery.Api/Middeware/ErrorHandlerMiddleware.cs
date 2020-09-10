@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DroneDelivery.Api.Middeware
 {
+
     public class ErrorHandlerMiddleware
     {
         private readonly RequestDelegate _next;

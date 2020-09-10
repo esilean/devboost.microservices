@@ -29,12 +29,26 @@
     <Compile Update="BDD\CriarPedido.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="BDD\RealizarPagamento.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="BDD\WebhookReceberPagamento.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <SpecFlowFeatureFiles Update="BDD\CriarPedido.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CriarPedido.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="BDD\RealizarPagamento.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RealizarPagamento.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="BDD\WebhookReceberPagamento.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>WebhookReceberPagamento.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 
