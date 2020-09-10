@@ -45,18 +45,14 @@ namespace DroneDelivery.Application.QueryHandlers.Drones
         private async Task<IEnumerable<Drone>> ObterDronesParaViagem()
         {
             var dronesProntos = await _unitOfWork.Drones.ObterDronesParaEntregaAsync();
+            var pedidos = dronesProntos.SelectMany(x => x.Pedidos).Where(x => x.Status == PedidoStatus.EmEntrega);
 
-            IEnumerable<Pedido> pedidos = null;
             foreach (var drone in dronesProntos)
-            {
                 drone.AtualizarStatus(DroneStatus.EmEntrega);
 
-                pedidos = drone.Pedidos.Where(x => x.Status == PedidoStatus.EmEntrega);
-                foreach (var pedido in pedidos)
-                    pedido.CriarHistorico(HistoricoPedido.Criar(drone.Id, pedido.Id));
+            foreach (var pedido in pedidos)
+                pedido.CriarHistorico(HistoricoPedido.Criar(pedido.DroneId.GetValueOrDefault(), pedido.Id));
 
-                pedidos = null;
-            }
 
             await _unitOfWork.SaveAsync();
             return dronesProntos;
